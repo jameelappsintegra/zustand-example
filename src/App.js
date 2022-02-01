@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react";
+import "./App.css";
+import Form from "./components/Form";
+import Input from "./components/Input";
+import People from "./components/People";
+import Pokemon from "./components/Pokemon";
+import { useSettingsStore } from "./store";
 
 function App() {
+  const toggleDarkMode = useSettingsStore((state) => state.toggleDarkMode);
+  const dark = useSettingsStore((state) => state.dark);
+  useEffect(() => {
+    if (dark) {
+      document.querySelector("body").classList.add("dark");
+    } else {
+      document.querySelector("body").classList.remove("dark");
+    }
+  }, [dark]);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h2>Zustand Example</h2>
+      <button onClick={toggleDarkMode}>Toggle Dark mode</button>
+      <h2>People</h2>
+      <Input />
+      <People />
+      <Pokemon />
+      <Form />
     </div>
   );
 }
