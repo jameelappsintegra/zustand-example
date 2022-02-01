@@ -11,7 +11,7 @@ let peopleStore = (set) => ({
   addPerson: (person) => set((state) => ({ people: [...state.people, person] }))
 });
 
-const PokemonStore = (set) => ({
+let pokemonStore = (set) => ({
   pokemons: [
     { id: 1, name: "Bulbasaur" },
     { id: 2, name: "Ivysaur" },
@@ -38,6 +38,9 @@ settingsStore = persist(settingsStore, { name: "user_settings" });
 peopleStore = devtools(peopleStore);
 peopleStore = persist(peopleStore, { name: "people_list" });
 
+pokemonStore = devtools(pokemonStore);
+pokemonStore = persist(pokemonStore, { name: "pokemon_list" });
+
 export const useSettingsStore = create(settingsStore);
 export const usePeopleStore = create(peopleStore);
-export const usePokemonStore = create(PokemonStore);
+export const usePokemonStore = create(pokemonStore);
